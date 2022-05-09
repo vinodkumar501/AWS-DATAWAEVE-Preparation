@@ -1,1 +1,10 @@
+Aws cli install on ubuntu
 
+https://linuxhint.com/install_aws_cli_ubuntu/
+
+apt-get update
+sudo apt-get install awscli
+aws --version
+
+aws --version
+aws-cli/1.22.34 Python/3.10.4 Linux/5.15.0-1004-aws botocore/1.23.34
