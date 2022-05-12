@@ -1,0 +1,57 @@
+For any VM if you want to check metadata :
+
+login to vm and execute 
+
+#curl http://169.254.169.254/latest/meta-data
+
+ip 169.254.169.25 related to local network of system, it donot have access to internet.
+
+#[root@ip-172-31-28-64 ~]# curl http://169.254.169.254/latest/meta-data
+
+ami-id
+ami-launch-index
+ami-manifest-path
+block-device-mapping/
+events/
+hibernation/
+hostname
+identity-credentials/
+instance-action
+
+#[root@ip-172-31-28-64 ~]# curl http://169.254.169.254/latest/meta-data/public-ipv4
+3.92.32.7
+
+
+========================== user data =========================
+User data
+
+#!/bin/bash
+yum update -y
+yum install -y httpd
+systemctl start httpd
+systemctl enable httpd
+EC2ID=$(curl -s http://169.254.169.254/latest/meta-data/instance-id) 
+echo '<center><h1>The Instance ID of this Amazon EC2 instance is: EC2ID </h1></center>' > /var/www/html/index.txt
+sed "s/EC2ID/$EC2ID/" /var/www/html/index.txt > /var/www/html/index.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
