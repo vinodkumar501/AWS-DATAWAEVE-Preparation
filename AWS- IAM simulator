@@ -13,3 +13,47 @@ The Security Token Service allows for temporary credentials to be used with iden
 Grant least privileges is an IAM Best Practices that makes sure users only have access to what they need and nothing more
 
 You can delegate permissions using roles. It’s a great way to provide permissions to resources for users and services without using permanent credentials.
+
+
+============================================== Scenario: If your vm need to connect with other like s3 need to perform ============================================
+
+
+1. ec2 instance
+2.create iam role "readonlys3" access
+3.create a bucket 
+4. add role to ec2 instance
+
+then execute while login to the vm 
+
+
+#aws s3 ls
+dataweave213
+
+
+#aws s3 ls s3://dataweave213
+2022-05-12 16:12:46    2299775 logs4.txt
+
+============================
+
+you can also access using secret and access keys but it wilil store the keys in the vm console of ./aws but its not recommended approach. once you added keys you can execute 
+any step of aws cli
+
+
+#aws s3 ls
+
+using roles is secure way compared to secret keys . both will perform same action but using secret key( store in vm ./aws folder ) its not good approach.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
