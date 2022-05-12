@@ -1,1 +1,15 @@
+Cheatsheet
 
+https://digitalcloud.training/aws-iam/
+
+IAM 
+->user
+->group
+->Policies
+->roles
+
+The Security Token Service allows for temporary credentials to be used with identity federation, delegation, cross-account access, and IAM roles.
+
+Grant least privileges is an IAM Best Practices that makes sure users only have access to what they need and nothing more
+
+You can delegate permissions using roles. It’s a great way to provide permissions to resources for users and services without using permanent credentials.
