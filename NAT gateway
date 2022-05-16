@@ -1,1 +1,71 @@
+1. create vpc 
+( name : dataweave-vpc ) (cidr 10.0.0.0/16) and create
 
+2. create 2 subnetes 
+( dataweave-pvt-sub, dataweave-pub-sub) select vpc ,select availabity zone 
+
+select cidr 
+10.0.1.0/24  ( us-east-1a )
+10.0.2.0/24  ( us-east-1b )
+
+3. create Internet gateway ( name it and create ) -> dataweave-igw
+by default it should be detached state , goto console and add attach IGW to vpc 
+
+4. create nat gateway ( name: dataweave-nat-gateway ,subnet: dataPublic-subnet , connectivity type: public , create elastic ip ) and create 
+note: nat gateway must deploy on public subnet.
+
+5. create 2 route tables
+i. dataweave-pvt-rt , slect vpc : dataweave-vpc
+ii.dataweave-pub-rt ,slect vpc : dataweave-vpc
+
+dataweave-pub-rt
+-----
+in subnet assoication click on Public-subnet : dataweave-pub-sub
+in routes: add internet gateway 
+0.0.0.0/0  internet gateway 
+
+dataweave-pvt-rt:
+in subnet assoication click on Private-subnet : dataweave-pvt-sub 
+in routes :  add nat gateway
+
+0.0.0.0/0  nat gateway
+
+6.create 2 instance 1 in dataPublic-subnet , dataPrivate-subnet
+
+
+7. create 2 vm instance 1 in public subnet and other in pvt subnet
+select autoassign public address as yes for public subet 
+
+secuirty group allow ssh from 0.0.0.0/0
+
+for pvt subnet autoassign public address as as disable.
+secuirty group allow ssh from vpc range.
+
+
+How to connect priave subnet vm?
+===============================
+
+first connect public subnet vm and copy .pem key in the server and from there connect to private subnet vm instance
+
+ssh -i "ec2.pem" ec2-user@pvt-ip-address
+
+sudo su -
+
+yum update ( it will donwlaod repo)  if you remove nat gateway it fail to downlaod repo from internete.
+
+
+
+=============================================================================
+2. create 2 subnetes
+
+dataPublic-subnet
+->select vpc id
+->name ( dataPublic-subnet )
+->avilability zone ( any us-east-1a)
+->IPv4 CIDR block (10.0.1.0/24)
+
+dataPrivate-subnet
+->select vpc id
+->name ( dataPrivate-subnet )
+->avilability zone ( any us-east-1b)
+->IPv4 CIDR block (10.0.2.0/24)
