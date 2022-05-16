@@ -19,7 +19,7 @@ i. dataweave-pvt-rt , slect vpc : dataweave-vpc
 ii.dataweave-pub-rt ,slect vpc : dataweave-vpc
 
 dataweave-pub-rt
------
+----------------
 in subnet assoication click on Public-subnet : dataweave-pub-sub
 in routes: add internet gateway 
 0.0.0.0/0  internet gateway 
@@ -47,11 +47,40 @@ How to connect priave subnet vm?
 
 first connect public subnet vm and copy .pem key in the server and from there connect to private subnet vm instance
 
+once copy key from local to vm , update premission of file to 600
+chown 600 ec2.pem
+
 ssh -i "ec2.pem" ec2-user@pvt-ip-address
+
+[root@ip-10-0-2-234 ~]# ssh -i "ec2.pem" ec2-user@10.0.1.14
+The authenticity of host '10.0.1.14 (10.0.1.14)' can't be established.
+ECDSA key fingerprint is SHA256:vxqUPnt+Gp0zG0NHDW6fgV6yxBaQZLcZtKRecoYWfr8.
+ECDSA key fingerprint is MD5:1b:99:e0:f9:28:f2:af:aa:e2:8c:c1:f9:9a:63:57:92.
+Are you sure you want to continue connecting (yes/no)? 
+
+[root@ip-10-0-2-234 ~]# ssh -i "ec2.pem" ec2-user@10.0.1.14
+
+       __|  __|_  )
+       _|  (     /   Amazon Linux 2 AMI
+      ___|\___|___|
+
+https://aws.amazon.com/amazon-linux-2/
+[ec2-user@ip-10-0-1-14 ~]$ sudo su -
+
+
 
 sudo su -
 
 yum update ( it will donwlaod repo)  if you remove nat gateway it fail to downlaod repo from internete.
+
+[root@ip-10-0-1-14 ~]# yum update 
+Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+amzn2-core                                                                                         | 3.7 kB  00:00:00     
+amzn2extra-docker                                                                                  | 3.0 kB  00:00:00     
+amzn2extra-kernel-5.10                                                                             | 3.0 kB  00:00:00     
+(1/7): amzn2-core/2/x86_64/group_gz                                                                | 2.5 kB  00:00:00     
+(2/7): amzn2-core/2/x86_64/updateinfo                                                              | 472 kB  00:00:00     
+(3/7): amzn2extra-docker/2/x86_64/upd
 
 
 
