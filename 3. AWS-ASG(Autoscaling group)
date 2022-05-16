@@ -1,1 +1,79 @@
+====================================================== Launch template ======================================================
+
+On EC2 instance select "Launch template"
+
+-> create launch template
+Launch template name - required : Dataweave-LT1
+
+------------------------------------
+Note:
+Auto Scaling guidance Info
+Select this if you intend to use this template with EC2 Auto Scaling
+Provide guidance to help me set up a template that I can use with EC2 Auto Scaling
+------------------------------------
+
+Application and OS Images (Amazon Machine Image) - required:  amazon linux2
+Instance type: t2.micro
+
+keypair: dataweave.pem
+
+Goto advanced details and update user data:
+
+#!/bin/bash
+yum update -y
+yum install -y httpd
+systemctl start httpd
+systemctl enable httpd
+EC2ID=$(curl -s http://169.254.169.254/latest/meta-data/instance-id) 
+echo '<center><h1>The Instance ID of this Amazon EC2 instance is: EC2ID </h1></center>' > /var/www/html/index.txt
+sed "s/EC2ID/$EC2ID/" /var/www/html/index.txt > /var/www/html/index.html
+
+
+click on "create launch template"
+
+
+================ Once template creation is done create autoscaling group ==================
+
+
+Auto Scaling group name : Dataweave-ASG
+Lauch template : Dataweave-LT1
+next
+
+Step2:
+Network
+-> select vpc and availability zones( us-east-1a ,1b,1c) instances will deploy in to these zones
+
+NEXT:
+
+Step3: optinal
+
+NEXT:
+Step4: optinal
+
+Desired capacity : 2
+Minimum capacity : 2
+Maximum capacity: 4
+
+Scaling policies : none
+
+
+Optional ----> create autoscaling instance
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
