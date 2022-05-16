@@ -12,6 +12,18 @@ select cidr
 10.0.1.0/24  ( us-east-1a )
 10.0.2.0/24  ( us-east-1b )
 
+dataPublic-subnet
+->select vpc id
+->name ( dataPublic-subnet )
+->avilability zone ( any us-east-1a)
+->IPv4 CIDR block (10.0.1.0/24)
+
+dataPrivate-subnet
+->select vpc id
+->name ( dataPrivate-subnet )
+->avilability zone ( any us-east-1b)
+->IPv4 CIDR block (10.0.2.0/24)
+
 3. create Internet gateway ( name it and create ) -> dataweave-igw
 by default it should be detached state , goto console and add attach IGW to vpc 
 
@@ -89,16 +101,4 @@ amzn2extra-kernel-5.10                                                          
 
 
 =============================================================================
-2. create 2 subnetes
 
-dataPublic-subnet
-->select vpc id
-->name ( dataPublic-subnet )
-->avilability zone ( any us-east-1a)
-->IPv4 CIDR block (10.0.1.0/24)
-
-dataPrivate-subnet
-->select vpc id
-->name ( dataPrivate-subnet )
-->avilability zone ( any us-east-1b)
-->IPv4 CIDR block (10.0.2.0/24)
